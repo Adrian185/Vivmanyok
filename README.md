@@ -1,1 +1,1 @@
-TUDJAK FORKOLNI:)
+Az átalakulás az eleinte szénfűtésű gőzgép feltalálásával és a kezdetben textilüzemekben elindult gépesítéssel kezdődött. Az ipari forradalom technológiai és gazdasági folyamatainak a gőzhajtású hajók, csónakok, és a gőzvasút bevezetése adott újabb lendületet.
