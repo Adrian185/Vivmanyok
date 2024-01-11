@@ -1,0 +1,87 @@
+import random
+
+# Fájlból beolvasás és adatok tárolása
+def beolvasas(file_path):
+    adatok = []
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                adatok.append(line.strip())
+    except FileNotFoundError:
+        print("A megadott fájl nem található.")
+    return adatok
+
+# Összes adat listázása
+def osszes_adat_listazas(adatok):
+    for adat in adatok:
+        print(adat)
+
+# Adatok listázása fájlba
+def adatok_listazasa_fajlba(adatok):
+    output_file = input("Adja meg a kimeneti fájl nevét: ")
+    try:
+        with open(output_file, 'w') as file:
+            for adat in adatok:
+                file.write(adat + '\n')
+        print(f"Az adatok ki lettek írva a(z) {output_file} fájlba.")
+    except Exception as e:
+        print(f"Hiba történt a fájl írása közben: {e}")
+
+# Időtartományban lévő vívmányok listázása
+def idotartomany_listazas(adatok):
+    kezdo_ev = int(input("Adja meg a kezdő évet: "))
+    vegso_ev = int(input("Adja meg a végső évet: "))
+
+    for adat in adatok:
+        evszam = int(adat.split(',')[0])
+        if kezdo_ev <= evszam <= vegso_ev:
+            print(adat)
+
+# Tudástesztfeladat
+def tudastesztfeladat(adatok):
+    evszamok = [int(adat.split(',')[0]) for adat in adatok]
+    helyes_ev = random.choice(evszamok)
+    valasztasi_lehetosegek = random.sample(evszamok, 3)
+    valasztasi_lehetosegek.append(helyes_ev)
+    random.shuffle(valasztasi_lehetosegek)
+
+    print(f"Melyik évben történt a kiválasztott esemény? Válasszon az alábbi évszámok közül:")
+    for i, ev in enumerate(valasztasi_lehetosegek, 1):
+        print(f"{i}. {ev}")
+
+    valasz = int(input("Válasza (1-4): "))
+    if valasztasi_lehetosegek[valasz - 1] == helyes_ev:
+        print("Helyes válasz! Gratulálok!")
+    else:
+        print(f"Sajnálom, rossz válasz. A helyes válasz: {helyes_ev}")
+
+# Főprogram
+def main():
+    file_path = input("Adja meg a beolvasandó fájl nevét: ")
+    adatok = beolvasas(file_path)
+
+    while True:
+        print("\nVálasszon a következő alfeladatok közül:")
+        print("1. Minden adat listázása a képernyőre")
+        print("2. Minden adat listázása egy fájlba")
+        print("3. Adott időtartományban lévő vívmányok listázása")
+        print("4. Tudástesztfeladat")
+        print("0. Kilépés")
+
+        valasztas = input("Választás (0-4): ")
+
+        if valasztas == '1':
+            osszes_adat_listazas(adatok)
+        elif valasztas == '2':
+            adatok_listazasa_fajlba(adatok)
+        elif valasztas == '3':
+            idotartomany_listazas(adatok)
+        elif valasztas == '4':
+            tudastesztfeladat(adatok)
+        elif valasztas == '0':
+            break
+        else:
+            print("Érvénytelen választás. Kérem, válasszon újra.")
+
+if __name__ == "__main__":
+    main()
